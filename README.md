@@ -33,8 +33,6 @@ At inference time, the application queries the Qdrant collection using the ColQw
 * Storage: [Supabase](https://supabase.com/)
 * Framework: [FastAPI 0.115.8](https://fastapi.tiangolo.com/)
 * Dependency & Package Manager: [uv](https://docs.astral.sh/uv/)
-* Linters: [Ruff](https://docs.astral.sh/ruff/)
-* Type Checking: [MyPy](https://mypy-lang.org/)
 * Deployment: [Docker](https://www.docker.com/)
 
 ## Configure
