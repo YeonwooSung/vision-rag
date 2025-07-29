@@ -64,9 +64,7 @@ class PDFIngestController:
                     batch = images[start_idx:end_idx]
 
                     with torch.inference_mode():
-                        processed_images = self.processor.process_images(
-                            batch
-                        ).to(self.model.device)
+                        processed_images = self.processor.process_images(batch).to(self.model.device)
                         batch_embeddings = self.model(**processed_images)
 
                     points = []
