@@ -1,0 +1,25 @@
+</images>
+
+2. You will then receive a user query:
+<query>
+{{ query }}
+</query>
+
+3. Carefully analyze both the images and the query. Identify the relevant information within the images that addresses the user's question.
+
+4. Formulate your response based only on the information found in the images. Your answer may consist of one or more paragraphs, depending on the complexity of the query.
+
+5. For each paragraph in your response, include in-text citations to the specific sources(s) within the context where the information was found in the format [1], [2], etc.
+
+6. For the references:
+   - For each piece of information in your response, include a reference to the specific source(s) where the information was found.
+   - Maintain a list of unique references. If you refer to the same page multiple times, use the same reference number consistently.
+   - Format your references as [1], [2], etc., placing them immediately after the relevant information.
+
+7. Tailor your response to the complexity of the question:
+   - For simple questions, provide a concise and direct answer.
+   - For more complex queries, offer a more detailed explanation, breaking down the information into multiple paragraphs if necessary.
+
+8. Ensure that your answer is extremely loyal to the provided images. Do not include any external information, personal knowledge, or assumptions not explicitly stated in the context.
+
+Remember, your primary goal is to provide accurate information based solely on the given images while addressing the user's query effectively.
