@@ -19,6 +19,12 @@ from vision_rag.app.api.dependencies import (
 )
 from vision_rag.app.services.img_uploader import SupabaseJPEGUploader
 from vision_rag.app.utils.qdrant_utils import upsert_with_retry
+from vision_rag.lib.muvera.fde_generator import (
+    EncodingType,
+    FixedDimensionalEncodingConfig,
+    generate_document_fde_batch,
+)
+
 
 router = APIRouter()
 
@@ -37,6 +43,17 @@ class PDFIngestController:
         self.uploader = uploader
         self.qdrant_client = qdrant_client
         self.collection_name = collection_name
+
+        # configurations for MUVERA
+        self.doc_config = FixedDimensionalEncodingConfig(
+            dimension=128,
+            num_repetitions=20,
+            num_simhash_projections=7,
+            seed=42,
+            fill_empty_partitions=True,  # Config for documents
+            encoding_type=EncodingType.DEFAULT_SUM,
+        )
+
 
     async def ingest(
         self, files: list[UploadFile], session_id: UUID4
@@ -66,6 +83,10 @@ class PDFIngestController:
                     with torch.inference_mode():
                         processed_images = self.processor.process_images(batch).to(self.model.device)
                         batch_embeddings = self.model(**processed_images)
+
+                    # MUVERA -> multi-vector to fixed dimensional encoding
+                    batch_vectors = batch_embeddings.cpu().numpy()
+                    batch_vectors = generate_document_fde_batch(batch_vectors, self.doc_config)
 
                     points = []
                     for offset, (_, embedding) in enumerate(
